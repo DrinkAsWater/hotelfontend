@@ -10,6 +10,14 @@ export const getHeader = () => {
     "Content-Type": "application/json",
   };
 };
+// 用於 FormData/文件上傳的 header（不設置 Content-Type）
+export const getHeaderMultipart = () => {
+  const token = localStorage.getItem("token");
+  return {
+    Authorization: `Bearer ${token}`,
+    // 不要設置 Content-Type，讓瀏覽器自動添加正確的 boundary
+  };
+};
 // This function  adds a new room room to the database
 export async function addRoom(photo, roomType, roomPrice) {
   const formData = new FormData();
@@ -17,12 +25,14 @@ export async function addRoom(photo, roomType, roomPrice) {
   formData.append("roomType", roomType);
   formData.append("roomPrice", roomPrice);
 
-  const response = await api.post("/rooms/add/new-room", formData);
-  if (response.status === 201) {
-    return true;
-  } else {
-    return false;
-  }
+  const response = await api.post("/rooms/add/new-room", formData,{
+		 headers: getHeaderMultipart()
+	})
+	if (response.status === 201) {
+		return true
+	} else {
+		return false
+	}
 }
 // This function get  all room types from these databases
 export async function getRoomTypes() {
