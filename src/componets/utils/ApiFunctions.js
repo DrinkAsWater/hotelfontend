@@ -25,14 +25,14 @@ export async function addRoom(photo, roomType, roomPrice) {
   formData.append("roomType", roomType);
   formData.append("roomPrice", roomPrice);
 
-  const response = await api.post("/rooms/add/new-room", formData,{
-		 headers: getHeaderMultipart()
-	})
-	if (response.status === 201) {
-		return true
-	} else {
-		return false
-	}
+  const response = await api.post("/rooms/add/new-room", formData, {
+    headers: getHeaderMultipart(),
+  });
+  if (response.status === 201) {
+    return true;
+  } else {
+    return false;
+  }
 }
 // This function get  all room types from these databases
 export async function getRoomTypes() {
@@ -56,7 +56,9 @@ export async function getAllRooms() {
 //This function deletes a room by the Id
 export async function deleteRoom(roomId) {
   try {
-    const result = await api.delete(`/rooms/delete/room/${roomId}`);
+    const result = await api.delete(`/rooms/delete/room/${roomId}`, {
+      headers: getHeader(),
+    });
     return result.data;
   } catch (error) {
     throw new Error(`Error deleting room ${error.message}`);
@@ -70,6 +72,7 @@ export async function updateRoom(roomId, roomData) {
   formData.append("photo", roomData.photo);
   const response = await api.put(`/rooms/update/${roomId}`, formData, {
     headers: {
+      ...getHeader(),
       "Content-Type": "multipart/form-data",
     },
   });
@@ -106,8 +109,8 @@ export async function bookRoom(roomId, booking) {
 // This function gets all bookings from the database
 export async function getAllBookings() {
   try {
-    const result = await api.get("/bookings/all-bookings",{
-      headers: getHeader()  // 添加這行
+    const result = await api.get("/bookings/all-bookings", {
+      headers: getHeader(), // 添加這行
     });
     return result.data;
   } catch (error) {

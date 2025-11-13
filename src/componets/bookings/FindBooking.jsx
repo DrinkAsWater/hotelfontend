@@ -88,7 +88,7 @@ const FindBooking = () => {
               className="form-control"
               type="text"
               id="confirmationCode"
-              name="confirmationCode"
+              name="confirmationCode" 
               value={confirmationCode}
               onChange={handleInputChange}
               placeholder="Enter the booking confirmation code"

@@ -105,11 +105,11 @@ const ExistingRoom = () => {
                       <td>{room.roomType}</td>
                       <td>{room.roomPrice}</td>
                       <td className="gap-2">
-                        <Link to={`/edit-room/${room.id}`}>
+                        <Link to={`/edit-room/${room.id}`} className="gap-2">
                           <span className="btn btn-info btn-sm">
                             <FaEye />
                           </span>
-                          <span className="btn btn-waring btn-sm">
+                          <span className="btn btn-warning btn-sm">
                             <FaEdit />
                           </span>
                         </Link>
@@ -126,7 +126,7 @@ const ExistingRoom = () => {
               </table>
               <RoomPaginator
                 currentPage={currentPage}
-                totalPage={calculateTotalPages(
+                totalPages={calculateTotalPages(
                   filteredRooms,
                   roomsPerPage,
                   rooms

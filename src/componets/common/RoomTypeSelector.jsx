@@ -20,7 +20,7 @@ useEffect(() => {
   };
 
   const handleAddNewRoomType = () => {
-    if (newRoomType !== "") {
+    if (newRoomType.trim() !== "") {
       setRoomTypes([...roomTypes, newRoomType]);
          handleRoomInputChange({
       target: {
@@ -35,7 +35,7 @@ useEffect(() => {
 
   return (
     <>
-      {roomTypes.length > 0 && (
+      { (
         <div className="w-100">
           <select  className="form-select w-100"
             name="roomType"
